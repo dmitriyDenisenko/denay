@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ksilisk.virdeanoff</groupId>
+    <artifactId>virdeanoff-parent</artifactId>
+    <version>${virdeanoff.project.version}</version>
+    <name>virdeanoff</name>
+
+    <packaging>pom</packaging>
+
+    <properties>
+        <virdeanoff.project.version>1.0</virdeanoff.project.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <spring.boot.version>3.2.1</spring.boot.version>
+        <spring.cloud.version>2023.0.0</spring.cloud.version>
+        <graphql.codegen.plugin.version>1.50</graphql.codegen.plugin.version>
+        <mojo.build.helper.plugin.version>3.5.0</mojo.build.helper.plugin.version>
+        <graphql.dgs.version>8.2.0</graphql.dgs.version>
+        <dgs.codegen.shared.core.version>6.1.2</dgs.codegen.shared.core.version>
+        <maven.surefire.plugin.version>3.2.2</maven.surefire.plugin.version>
+        <telegram.bots.api.version>6.9.7.1</telegram.bots.api.version>
+        <spring.statemachine.version>4.0.0</spring.statemachine.version>
+    </properties>
+
+    <modules>
+        <module>virdeanoff-auth-server</module>
+        <module>virdeanoff-resource-server</module>
+        <module>virdeanoff-common</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.surefire.plugin.version}</version>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot.version}</version>
+                    <configuration>
+<!--                        <image>-->
+<!--                            <env>-->
+<!--                                <BP_JVM_VERSION>17</BP_JVM_VERSION>-->
+<!--                                <BP_JVM_TYPE>JDK</BP_JVM_TYPE>-->
+<!--                            </env>-->
+<!--                        </image>-->
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

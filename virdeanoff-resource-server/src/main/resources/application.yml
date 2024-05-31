@@ -1,0 +1,52 @@
+virdean:
+  auth-server-uri: "http://localhost:9191"
+spring:
+  application:
+    name: virdeanoff-resource-server
+  mvc:
+    log-request-details: true
+    log-resolved-exception: true
+  data:
+    jpa:
+      repositories:
+        enabled: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/virdeanoff_main_db
+    username: test
+    password: test
+  cloud:
+    openfeign:
+      oauth2:
+        enabled: true
+        clientRegistrationId: "auth"
+      okhttp:
+        enabled: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: "${virdean.auth-server-uri}/oauth2/jwks"
+          issuer-uri: "${virdean.auth-server-uri}"
+      client:
+        registration:
+          auth:
+            client-id: "test"
+            client-secret: "test"
+            client-authentication-method: "client_secret_basic"
+            authorization-grant-type: "client_credentials"
+            scope:
+              - "ADMIN"
+            provider: "auth"
+        provider:
+          auth:
+            token-uri: "${virdean.auth-server-uri}/oauth2/token"
+
+debug: true
+logging:
+  level:
+    org:
+      springframework:
+        web: TRACE
+server:
+  port: 8787
